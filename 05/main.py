@@ -9,7 +9,7 @@ def read_stacks():
 
 def read_procedures():
     with open("input.txt") as file:
-        return [[*map(int, re.findall(r'\d+', line.strip()))] for line in file.readlines() if 'move' in line]
+        return [[*map(int, re.findall(r'\d+', line.strip()))] for line in file.readlines() if re.match(r'(move \d+ from \d+ to \d+)', line)]
 
 
 def crane_9000(procedure_list, stack_list):
