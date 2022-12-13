@@ -1,6 +1,5 @@
 """Advent of Code Day 13"""
 import ast
-import copy
 from functools import cmp_to_key
 import math
 
@@ -11,20 +10,15 @@ def read_input() -> list:
         return [ast.literal_eval(line.strip()) for line in file if line.strip() != '']
 
 
-def compare(value_a, value_b):
+def compare(val_a, val_b):
     '''compare first and second value'''
-    a_copy = copy.deepcopy(value_a)
-    b_copy = copy.deepcopy(value_b)
-    if all(isinstance(value, list) for value in [a_copy, b_copy]):
-        value = 0
-        while len(a_copy) and len(b_copy) and not abs(value):
-            value = compare(a_copy.pop(0), b_copy.pop(0))
-        return value if abs(value) else compare(len(a_copy), len(b_copy))
-    if all(isinstance(value, int) for value in [a_copy, b_copy]):
-        return 1 if a_copy > b_copy else (a_copy == b_copy) - 1
-    if isinstance(a_copy, list):
-        return compare(a_copy, [b_copy])
-    return compare([a_copy], b_copy)
+    if all(isinstance(value, list) for value in [val_a, val_b]):
+        return comps[0] if len(comps:=[comp for i in range(min(len(val_a), len(val_b))) if abs(comp:=compare(val_a[i], val_b[i]))]) > 0 else compare(len(val_a), len(val_b))
+    if all(isinstance(value, int) for value in [val_a, val_b]):
+        return 1 if val_a > val_b else (val_a == val_b) - 1
+    if isinstance(val_a, list):
+        return compare(val_a, [val_b])
+    return compare([val_a], val_b)
 
 
 if __name__ == "__main__":
